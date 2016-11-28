@@ -1,0 +1,10 @@
+consumption<-read.table(file="household_power_consumption.txt",header=TRUE,sep=";", skip = 66636, nrows = 2880, col.names = c("Date","Time","Global_active_power","Global_reactive_power","Voltage","Global_intensity","Sub_metering_1","Sub_metering_2","Sub_metering_3"))
+DateTime <- strptime(paste(consumption$Date, consumption$Time), "%d/%m/%Y %H:%M:%S")
+plot.new()
+plot(DateTime, consumption$Sub_metering_1, type = "l", xlab="", ylab = "Energy sub metering", col = "black")
+lines(DateTime, consumption$Sub_metering_2, col="orange")
+lines(DateTime, consumption$Sub_metering_3, col="blue")
+legend("topright", legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty = c(1,1,1), col = c("black","orange","blue")) 
+dev.copy(png,'plot3.png')
+dev.off()
+
